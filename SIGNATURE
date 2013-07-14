@@ -1,0 +1,58 @@
+This file contains message digests of all files listed in MANIFEST,
+signed via the Module::Signature module, version 0.73.
+
+To verify the content in this distribution, first make sure you have
+Module::Signature installed, then type:
+
+    % cpansign -v
+
+It will check each file's integrity, as well as the signature's
+validity.  If "==> Signature verified OK! <==" is not displayed,
+the distribution may already have been compromised, and you should
+not run its Makefile.PL or Build.PL.
+
+-----BEGIN PGP SIGNED MESSAGE-----
+Hash: SHA1
+
+SHA1 310396fbb47824954b32412f52d5e2d83a8ee429 Changes
+SHA1 2a5cec17dfcf1dd4e56a17f552b76816dd14e470 INSTALL
+SHA1 425b43f09d540543817bef8dbecb4c1a2da36085 LICENSE
+SHA1 691304cffedf4f2d82ffa128237ffc2cf72b07ee MANIFEST
+SHA1 21aab499580c5140bbcd44b0fb7d8025814c48ea META.json
+SHA1 c4a305b50457b9bf83c65b81a9c2821bbbef9333 META.yml
+SHA1 3555b74cc83bd8eeda31d9c9fa5d4e45923d8333 Makefile.PL
+SHA1 2ef487cec7f787a871bdfbadb99cfa8d18001ac4 README
+SHA1 fb02b947447bb708986d83b78264129400cfa1b6 cpanfile
+SHA1 755998b613f747ef5f2f516daa78a3820798fd28 dist.ini
+SHA1 70298c336b233523c00163def9a921142740af96 lib/PerlIO/via/GnuPG.pm
+SHA1 3c1b9697e8a48460a6e5241d1923ce9f23830c54 t/00-compile.t
+SHA1 479884ee33e6a50765a083df7b2c991a5e28c035 t/000-report-versions-tiny.t
+SHA1 ce43660cafc909464b2ed4497c38ba6ffb647115 t/author-pod-spell.t
+SHA1 28bc5ad6f37e84daa09191f450076559ec11a172 t/basic.t
+SHA1 0108713ba0ac102c429f478a8a48807e71a9be84 t/gpghome/pubring.gpg
+SHA1 da39a3ee5e6b4b0d3255bfef95601890afd80709 t/gpghome/pubring.gpg.bak
+SHA1 1ce6d720fa3749fb8b7376918d6f87dc4119d0b3 t/gpghome/random_seed
+SHA1 e8a3681b0d173d8c5da3964d2b301d732353f3cd t/gpghome/secring.gpg
+SHA1 ff8d30bb9d5c9dcd6f7bd42c4a78c4e3f1db57aa t/gpghome/trustdb.gpg
+SHA1 2e95bc585ee8c852a8faea15c884649019d64bb1 t/input.txt
+SHA1 3dc4251e692ebff992b81577598c3ff225785413 t/input.txt.asc
+SHA1 9c3627ff37f4fd5bddc34bf46cf3359eaf76a060 t/release-consistent-version.t
+SHA1 a032c41ef6887fab1b900669c2d304fab46680e2 t/release-eol.t
+SHA1 b3a7fdd5aeb2fde870d9a3e200cb824c791c7ed0 t/release-has-version.t
+SHA1 123002ee1a91f83a6765c5d9e4f9714d41551247 t/release-minimum-version.t
+SHA1 879865025bad5f6941131fe9966cde792733f1e8 t/release-no-smart-comments.t
+SHA1 455d1dd1867212a665ad5ea4126b572411de300c t/release-no-tabs.t
+SHA1 98f407bcd77c23a05adeb5d6f3fc220cea560b6b t/release-pod-coverage.t
+SHA1 df43c034c02b108b2718ac82c63311df01d99bed t/release-pod-linkcheck.t
+SHA1 ff02f4cdad74ca2c7c9a9018e0e1cd0f1f9b8634 t/release-pod-syntax.t
+-----BEGIN PGP SIGNATURE-----
+Version: GnuPG v1.4.11 (GNU/Linux)
+
+iQEcBAEBAgAGBQJR4jcMAAoJEOd5N1CvIgQk4osH/jl9aD/hXqbItf7U/64IZ1Em
+3Z/hnWW+qUB384aH3c/+FPQr1jISKqIKqMx+aY9U8xya3Up+xQ7RsEwDVveE6yDe
+bMYfzaLjHuWqkwDfeuaFmcva/b+uFnQX1kRqnXHm4FivitYXvf3/XdmZVeuGNKhi
+xGyX7cEyL/ofpooVt7RUiP7A2F93CGtz24kSjleEhJxdnwPSwf4/TRa9uLHBMpjv
+w+Zh/pXe4DHFitMVYJbxbkNQ89KlqTD/xe4a4T3TLQpDKx0ipwJT9OphvnOf8uHN
+zkVMnin3clF4ECx6Wy1zhgDgakA9D1iMQBquvqvMSHcmBlbDQhQxrPWyOwEjAh8=
+=PJ3A
+-----END PGP SIGNATURE-----
