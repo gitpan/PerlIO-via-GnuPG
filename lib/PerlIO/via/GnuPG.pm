@@ -12,9 +12,9 @@ BEGIN {
   $PerlIO::via::GnuPG::AUTHORITY = 'cpan:RSRCHBOY';
 }
 {
-  $PerlIO::via::GnuPG::VERSION = '0.001';
+  $PerlIO::via::GnuPG::VERSION = '0.002';
 }
-# git description: d1d750a
+# git description: 0.001-4-g3413f1d
 
 
 # ABSTRACT: Layer to try to decrypt on read
@@ -34,11 +34,7 @@ use Symbol 'gensym';
 sub PUSHED {
     my ($class, $mode) = @_;
 
-    my $buffer;
-    return bless {
-        #buffer => undef, # \$buffer,
-    }, $class;
-    #return bless my \$buffer, $class;
+    return bless { }, $class;
 }
 
 sub FILL {
@@ -52,7 +48,7 @@ sub FILL {
 
     ### $maybe_encrypted
     my ($in, $out, $error) = (gensym, gensym, gensym);
-    my $run = "gpg -qd --no-tty --command-fd 0";
+    my $run = 'gpg -qd --no-tty --command-fd 0';
     my $pid = open3($in, $out, $error, $run);
 
     ### $pid
@@ -85,7 +81,7 @@ PerlIO::via::GnuPG - Layer to try to decrypt on read
 
 =head1 VERSION
 
-This document describes version 0.001 of PerlIO::via::GnuPG - released July 14, 2013 as part of PerlIO-via-GnuPG.
+This document describes version 0.002 of PerlIO::via::GnuPG - released July 20, 2013 as part of PerlIO-via-GnuPG.
 
 =head1 SYNOPSIS
 

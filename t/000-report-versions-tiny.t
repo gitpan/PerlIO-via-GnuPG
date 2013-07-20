@@ -57,6 +57,7 @@ eval { $v .= pmver('Symbol','any version') };
 eval { $v .= pmver('Test::More','0.88') };
 eval { $v .= pmver('Test::Pod','1.41') };
 eval { $v .= pmver('Test::Pod::Coverage','1.08') };
+eval { $v .= pmver('Test::Skip::UnlessExistsExecutable','any version') };
 eval { $v .= pmver('strict','any version') };
 eval { $v .= pmver('version','0.9901') };
 eval { $v .= pmver('warnings','any version') };

@@ -46,14 +46,15 @@
          "requires" : {
             "File::Find" : "0",
             "File::Temp" : "0",
-            "Test::More" : "0.88"
+            "Test::More" : "0.88",
+            "Test::Skip::UnlessExistsExecutable" : "0"
          }
       }
    },
    "provides" : {
       "PerlIO::via::GnuPG" : {
          "file" : "lib/PerlIO/via/GnuPG.pm",
-         "version" : "0.001"
+         "version" : "0.002"
       }
    },
    "release_status" : "stable",
@@ -67,7 +68,7 @@
          "web" : "https://github.com/RsrchBoy/PerlIO-via-GnuPG"
       }
    },
-   "version" : "0.001",
+   "version" : "0.002",
    "x_Dist_Zilla" : {
       "perl" : {
          "version" : "5.016002"
