@@ -11,11 +11,8 @@ package PerlIO::via::GnuPG;
 BEGIN {
   $PerlIO::via::GnuPG::AUTHORITY = 'cpan:RSRCHBOY';
 }
-{
-  $PerlIO::via::GnuPG::VERSION = '0.002';
-}
-# git description: 0.001-4-g3413f1d
-
+# git description: 0.002-13-gc9e4ff1
+$PerlIO::via::GnuPG::VERSION = '0.003';
 
 # ABSTRACT: Layer to try to decrypt on read
 
@@ -25,9 +22,6 @@ use warnings;
 use IPC::Open3 'open3';
 use Symbol 'gensym';
 
-# debugging...
-#use Smart::Comments '###';
-
 # gpg --decrypt -q --status-file aksdja --no-tty
 # gpg --decrypt -q --status-file aksdja --no-tty .pause.gpg
 
@@ -36,6 +30,8 @@ sub PUSHED {
 
     return bless { }, $class;
 }
+
+sub _passthrough_unencrypted { 0 }
 
 sub FILL {
     my ($self, $fh) = @_;
@@ -54,12 +50,31 @@ sub FILL {
     ### $pid
     print $in $maybe_encrypted;
     close $in;
-    my @output    = <$out>;
-    my $error_msg = join '', <$error>;
+    my @output = <$out>;
+    my @errors = <$error>;
+
+    waitpid $pid, 0;
 
     ### @output
-    ### $error_msg
-    waitpid $pid, 0;
+    ### @errors
+
+    ### filter warnings out...
+    @errors = grep { ! /WARNING:/ } @errors;
+
+    if (@errors) {
+        my $not_encrypted = scalar grep { /no valid OpenPGP data found/ } @errors;
+
+        ### passthrough: $self->_passthrough_unencrypted
+        if ($not_encrypted) {
+            die "file does not appear to be encrypted!: @errors"
+                unless $self->_passthrough_unencrypted;
+            # FIXME @output = split /\n/, $maybe_encrypted;
+            @output = ($maybe_encrypted);
+        }
+        else {
+            die "Error decrypting file: @errors";
+        }
+    }
 
     $self->{buffer} = [ @output ];
     return shift @{ $self->{buffer} };
@@ -71,9 +86,9 @@ __END__
 
 =pod
 
-=encoding utf-8
+=encoding UTF-8
 
-=for :stopwords Chris Weyl
+=for :stopwords Chris Weyl decrypt
 
 =head1 NAME
 
@@ -81,12 +96,13 @@ PerlIO::via::GnuPG - Layer to try to decrypt on read
 
 =head1 VERSION
 
-This document describes version 0.002 of PerlIO::via::GnuPG - released July 20, 2013 as part of PerlIO-via-GnuPG.
+This document describes version 0.003 of PerlIO::via::GnuPG - released April 08, 2014 as part of PerlIO-via-GnuPG.
 
 =head1 SYNOPSIS
 
     use PerlIO::via::GnuPG;
 
+    # dies on error, and if the file is not encrypted
     open(my $fh, '<:via(GnuPG)', 'secret.txt.asc')
         or die "cannot open! $!";
 
@@ -95,7 +111,7 @@ This document describes version 0.002 of PerlIO::via::GnuPG - released July 20, 
 =head1 DESCRIPTION
 
 This is a L<PerlIO> module to decrypt files transparently.  It's pretty
-simple, does not support writing, but works.
+simple and does not support writing, but works.
 
 ...and if it doesn't, please file an issue :)
 
@@ -106,6 +122,10 @@ simple, does not support writing, but works.
 Please see those modules/websites for more information related to this module.
 
 =over 4
+
+=item *
+
+L<PerlIO::via::GnuPG::Maybe|PerlIO::via::GnuPG::Maybe>
 
 =item *
 
