@@ -52,13 +52,16 @@ eval { $v .= pmver('ExtUtils::MakeMaker','6.30') };
 eval { $v .= pmver('File::Spec','any version') };
 eval { $v .= pmver('IO::Handle','any version') };
 eval { $v .= pmver('IPC::Open3','any version') };
+eval { $v .= pmver('List::AllUtils','any version') };
 eval { $v .= pmver('Symbol','any version') };
 eval { $v .= pmver('Test::CheckDeps','0.010') };
 eval { $v .= pmver('Test::More','0.94') };
 eval { $v .= pmver('Test::Skip::UnlessExistsExecutable','any version') };
+eval { $v .= pmver('autodie','2.25') };
 eval { $v .= pmver('parent','any version') };
 eval { $v .= pmver('strict','any version') };
 eval { $v .= pmver('warnings','any version') };
+eval { $v .= pmver('warnings::register','any version') };
 
 
 # All done.

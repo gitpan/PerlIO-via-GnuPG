@@ -11,7 +11,7 @@ package PerlIO::via::GnuPG::Maybe;
 BEGIN {
   $PerlIO::via::GnuPG::Maybe::AUTHORITY = 'cpan:RSRCHBOY';
 }
-$PerlIO::via::GnuPG::Maybe::VERSION = '0.003';
+$PerlIO::via::GnuPG::Maybe::VERSION = '0.004';
 # ABSTRACT: Layer to decrypt or pass-through unencrypted data on read
 
 use strict;
@@ -37,7 +37,7 @@ PerlIO::via::GnuPG::Maybe - Layer to decrypt or pass-through unencrypted data on
 
 =head1 VERSION
 
-This document describes version 0.003 of PerlIO::via::GnuPG::Maybe - released April 08, 2014 as part of PerlIO-via-GnuPG.
+This document describes version 0.004 of PerlIO::via::GnuPG::Maybe - released April 14, 2014 as part of PerlIO-via-GnuPG.
 
 =head1 SYNOPSIS
 
@@ -92,8 +92,8 @@ L<PerlIO::via::GnuPG|PerlIO::via::GnuPG>
 
 =head1 SOURCE
 
-The development version is on github at L<http://github.com/RsrchBoy/PerlIO-via-GnuPG>
-and may be cloned from L<git://github.com/RsrchBoy/PerlIO-via-GnuPG.git>
+The development version is on github at L<http://https://github.com/RsrchBoy/PerlIO-via-GnuPG>
+and may be cloned from L<git://https://github.com/RsrchBoy/PerlIO-via-GnuPG.git>
 
 =head1 BUGS
 

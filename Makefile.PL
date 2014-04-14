@@ -22,10 +22,13 @@ my %WriteMakefileArgs = (
   "NAME" => "PerlIO::via::GnuPG",
   "PREREQ_PM" => {
     "IPC::Open3" => 0,
+    "List::AllUtils" => 0,
     "Symbol" => 0,
+    "autodie" => "2.25",
     "parent" => 0,
     "strict" => 0,
-    "warnings" => 0
+    "warnings" => 0,
+    "warnings::register" => 0
   },
   "TEST_REQUIRES" => {
     "File::Spec" => 0,
@@ -35,7 +38,7 @@ my %WriteMakefileArgs = (
     "Test::More" => "0.94",
     "Test::Skip::UnlessExistsExecutable" => 0
   },
-  "VERSION" => "0.003",
+  "VERSION" => "0.004",
   "test" => {
     "TESTS" => "t/*.t"
   }
@@ -46,13 +49,16 @@ my %FallbackPrereqs = (
   "File::Spec" => 0,
   "IO::Handle" => 0,
   "IPC::Open3" => 0,
+  "List::AllUtils" => 0,
   "Symbol" => 0,
   "Test::CheckDeps" => "0.010",
   "Test::More" => "0.94",
   "Test::Skip::UnlessExistsExecutable" => 0,
+  "autodie" => "2.25",
   "parent" => 0,
   "strict" => 0,
-  "warnings" => 0
+  "warnings" => 0,
+  "warnings::register" => 0
 );
 
 

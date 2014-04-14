@@ -11,16 +11,21 @@ package PerlIO::via::GnuPG;
 BEGIN {
   $PerlIO::via::GnuPG::AUTHORITY = 'cpan:RSRCHBOY';
 }
-# git description: 0.002-13-gc9e4ff1
-$PerlIO::via::GnuPG::VERSION = '0.003';
+# git description: 0.003-7-gb91cfad
+$PerlIO::via::GnuPG::VERSION = '0.004';
 
 # ABSTRACT: Layer to try to decrypt on read
 
 use strict;
+use warnings::register qw{ unencrypted };
+#use warnings::register;
 use warnings;
+
+use autodie 2.25;
 
 use IPC::Open3 'open3';
 use Symbol 'gensym';
+use List::AllUtils 'part';
 
 # gpg --decrypt -q --status-file aksdja --no-tty
 # gpg --decrypt -q --status-file aksdja --no-tty .pause.gpg
@@ -59,20 +64,36 @@ sub FILL {
     ### @errors
 
     ### filter warnings out...
-    @errors = grep { ! /WARNING:/ } @errors;
+    chomp @errors;
+    my ($errors, $warnings) = map { $_ || [] } part { /WARNING:/ ? 1 : 0 } @errors;
 
-    if (@errors) {
-        my $not_encrypted = scalar grep { /no valid OpenPGP data found/ } @errors;
+    ### $warnings
+    warnings::warnif(@$warnings)
+        if !!$warnings && @$warnings;
 
+    if (!!$errors && @$errors) {
+
+        my $not_encrypted = scalar grep { /no valid OpenPGP data found/ } @$errors;
+
+        ### $not_encrypted
         ### passthrough: $self->_passthrough_unencrypted
         if ($not_encrypted) {
-            die "file does not appear to be encrypted!: @errors"
-                unless $self->_passthrough_unencrypted;
-            # FIXME @output = split /\n/, $maybe_encrypted;
-            @output = ($maybe_encrypted);
+
+            if ($self->_passthrough_unencrypted) {
+                warnings::warnif(
+                    'PerlIO::via::GnuPG::unencrypted',
+                    'File does not appear to be encrypted!',
+                );
+                @output = ($maybe_encrypted);
+            }
+            else {
+                die "File does not appear to be encrypted!";
+            }
         }
         else {
-            die "Error decrypting file: @errors";
+
+            # "@errors" here is intentional -- show the warnings, too
+            die "Errors while attempting decryption: @errors";
         }
     }
 
@@ -96,7 +117,7 @@ PerlIO::via::GnuPG - Layer to try to decrypt on read
 
 =head1 VERSION
 
-This document describes version 0.003 of PerlIO::via::GnuPG - released April 08, 2014 as part of PerlIO-via-GnuPG.
+This document describes version 0.004 of PerlIO::via::GnuPG - released April 14, 2014 as part of PerlIO-via-GnuPG.
 
 =head1 SYNOPSIS
 
@@ -116,6 +137,17 @@ simple and does not support writing, but works.
 ...and if it doesn't, please file an issue :)
 
 =for Pod::Coverage FILL PUSHED
+
+=head1 CUSTOM WARNING CATEGORIES
+
+This package emits warnings from time to time.  To disable warnings generated
+when passing through unencrypted data:
+
+    no warnings 'PerlIO::via::GnuPG::unencrypted';
+
+Likewise, to disable all warnings issued by this package:
+
+    no warnings 'PerlIO::via::GnuPG';
 
 =head1 SEE ALSO
 
@@ -139,8 +171,8 @@ L<PerlIO::via|PerlIO::via>
 
 =head1 SOURCE
 
-The development version is on github at L<http://github.com/RsrchBoy/PerlIO-via-GnuPG>
-and may be cloned from L<git://github.com/RsrchBoy/PerlIO-via-GnuPG.git>
+The development version is on github at L<http://https://github.com/RsrchBoy/PerlIO-via-GnuPG>
+and may be cloned from L<git://https://github.com/RsrchBoy/PerlIO-via-GnuPG.git>
 
 =head1 BUGS
 
